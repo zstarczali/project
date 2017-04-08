@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "Currency Converter";
+}
+<h2>@ViewBag.Title</h2>
+@using WebApplication5.Controllers;
+@using System.Collections;
+
+
+<div class="panel-group" id="collapse" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="collapse-heading-one">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#collapse" href="#collapse-one" aria-expanded="true" aria-controls="collapse-one">
+                    Select period
+                </a>
+            </h4>
+        </div>
+        <div id="collapse-one" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapse-heading-one">
+            <div class="panel-body" style="height:200px;">
+                <select id="Select1" class="form-control">
+                    @foreach (var item in ViewBag.data)
+                    {
+                        <option>@item</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="collapse-heading-two">
+            <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#collapse" href="#collapse-two" aria-expanded="false" aria-controls="collapse-two">
+                    Change currency
+                </a>
+            </h4>
+        </div>
+        <div id="collapse-two" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapse-heading-two">
+            <div class="panel-body" style="height:350px;">
+                <div class="form-group">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label class="control-label" for="form-group-select">My label</label>
+                                    <input class="form-control" id="Text1" type="text" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label class="control-label" for="form-group-select">Currency</label>
+                                    <select id="Select2" class="form-control">
+                                        @{
+                                            var ccode = ((HomeController)this.ViewContext.Controller).GetCurrencyCodes();
+                                            var currencies = ((HomeController)this.ViewContext.Controller).GetCurrencyNameFromCode(ccode);
+                                        }
+                                        @foreach (var item in currencies)
+                                        {
+                                            <option>@item.Value</option>
+                                        }
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label class="control-label" for="form-group-select">My label</label>
+                                    <input class="form-control" id="Text2" type="text" disabled />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label class="control-label" for="form-group-select">Currency</label>
+                                    <select class="form-control" id="Select3">
+                                        @foreach (var item in currencies)
+                                        {
+                                            <option>@item.Value</option>
+                                        }
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <input class="btn btn-default" id="Button1" type="button" value="Convert" />
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="collapse-heading-three">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#collapse" href="#collapse-three" aria-expanded="false" aria-controls="collapse-three">
+                        Accordion heading 3
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse-three" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapse-heading-three">
+                <div class="panel-body">
+                    Suspendisse ullamcorper massa eget eleifend iaculis.
+                </div>
+            </div>
+        </div>
+    </div>

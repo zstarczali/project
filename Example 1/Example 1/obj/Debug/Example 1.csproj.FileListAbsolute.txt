@@ -1,0 +1,133 @@
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\ApplicationInsights.config
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\csc.exe
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\csc.exe.config
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\csc.rsp
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\csi.exe
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\csi.rsp
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\Microsoft.CodeAnalysis.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\Microsoft.CSharp.Core.targets
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\Microsoft.VisualBasic.Core.targets
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\System.AppContext.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\System.Collections.Immutable.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\System.Diagnostics.StackTrace.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\System.IO.FileSystem.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\System.IO.FileSystem.Primitives.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\System.Reflection.Metadata.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\vbc.exe
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\vbc.exe.config
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\vbc.rsp
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\VBCSCompiler.exe
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\roslyn\VBCSCompiler.exe.config
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\WebApplication5.dll.config
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\WebApplication5.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\WebApplication5.pdb
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\Antlr3.Runtime.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\Microsoft.AI.Agent.Intercept.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\Microsoft.AI.DependencyCollector.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\Microsoft.AI.PerfCounterCollector.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\Microsoft.AI.ServerTelemetryChannel.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\Microsoft.AI.Web.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\Microsoft.AI.WindowsServer.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\Microsoft.ApplicationInsights.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\Microsoft.Web.Infrastructure.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\Newtonsoft.Json.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\System.Web.Helpers.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\System.Web.Mvc.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\System.Web.Optimization.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\System.Web.Razor.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\System.Web.WebPages.Deployment.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\System.Web.WebPages.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\System.Web.WebPages.Razor.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\WebGrease.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\System.Web.Helpers.xml
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\System.Web.Mvc.xml
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\System.Web.Optimization.xml
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\System.Web.Razor.xml
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\System.Web.WebPages.xml
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\System.Web.WebPages.Deployment.xml
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\System.Web.WebPages.Razor.xml
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\Antlr3.Runtime.pdb
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\Newtonsoft.Json.xml
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\Microsoft.ApplicationInsights.xml
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\Microsoft.AI.DependencyCollector.xml
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\Microsoft.AI.ServerTelemetryChannel.xml
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\Microsoft.AI.WindowsServer.xml
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\bin\Microsoft.AI.Web.xml
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\obj\Debug\WebApplication5.dll
+d:\rlung\documents\visual studio 2017\Projects\WebApplication5\WebApplication5\obj\Debug\WebApplication5.pdb
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\ApplicationInsights.config
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\csc.exe
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\csc.exe.config
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\csc.rsp
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\csi.exe
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\csi.rsp
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\System.AppContext.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\vbc.exe
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\vbc.exe.config
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\vbc.rsp
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\VBCSCompiler.exe
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\WebApplication5.dll.config
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\WebApplication5.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\WebApplication5.pdb
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\Antlr3.Runtime.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\Microsoft.AI.Web.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\Microsoft.ApplicationInsights.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\Newtonsoft.Json.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\System.Web.Helpers.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\System.Web.Mvc.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\System.Web.Optimization.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\System.Web.Razor.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\System.Web.WebPages.Deployment.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\System.Web.WebPages.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\System.Web.WebPages.Razor.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\WebGrease.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\System.Web.Helpers.xml
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\System.Web.Mvc.xml
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\System.Web.Optimization.xml
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\System.Web.Razor.xml
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\System.Web.WebPages.xml
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\System.Web.WebPages.Deployment.xml
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\System.Web.WebPages.Razor.xml
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\Antlr3.Runtime.pdb
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\Newtonsoft.Json.xml
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\Microsoft.ApplicationInsights.xml
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\bin\Microsoft.AI.Web.xml
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\obj\Debug\Example 1.csprojResolveAssemblyReference.cache
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\obj\Debug\WebApplication5.dll
+C:\Users\rlung\Source\Repos\WebApplication5\WebApplication5\obj\Debug\WebApplication5.pdb
