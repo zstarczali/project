@@ -22,7 +22,6 @@ namespace WebApplication5.Controllers
             XmlDocument doc1 = new XmlDocument();
             XmlNamespaceManager nsMgr = new XmlNamespaceManager(doc1.NameTable);
 
-
             Task t = new Task(() =>
             {
                 doc1.Load(url);
