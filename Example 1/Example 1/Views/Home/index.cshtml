@@ -11,53 +11,25 @@
     <script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 }
 
-@*<script type="text/javascript">
-        $(document).ready(function () {
-            $.ajax({
-                url: '/Rss/GetGoogleNews',
-                type: 'POST',
-                dataType: 'json',
-                success: test
-            });
-
-            $.ajax({
-                url: '/Rss/GetMSNNews',
-                type: 'POST',
-                dataType: 'json',
-                success: test
-            });
-        })
-
-
-        function test(result) {
-
-        }
-    </script>*@
 <script>
-    //\\\\\\\ JS  retrun message SucccessPost or FailPost
-    function SuccessMessage() {
-        alert("Succcess Post");
+    var onSuccess = function (data) {
+        $("#Text2").val(data);
     }
     function FailMessage() {
         alert("Fail Post");
     }
 </script>
 
-@using (Ajax.BeginForm("Convert", "Home", null, new AjaxOptions
+@using (Ajax.BeginForm("ConvertCurrency", "Home", null, new AjaxOptions
 {
     HttpMethod = "POST",
-    OnSuccess = "SuccessMessage",
+    OnSuccess = "onSuccess",
     OnFailure = "FailMessage",
-    UpdateTargetId = "resultTarget"
+    UpdateTargetId = "Text2"
 }, new { id = "MyNewNameId" })) // set new Id name for  Form
 {
-    <input type="submit" value="Search" />
-
+    <input class="btn btn-default" type="submit" value="Convert" />
 }
-
-
-<div id="resultTarget">  </div>
-
 <div class="panel-group" id="collapse" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="collapse-heading-one">
@@ -134,20 +106,6 @@
                         </tr>
                     </table>
                     <input class="btn btn-default" id="Button1" type="button" value="Convert" />
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="collapse-heading-three">
-                <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#collapse" href="#collapse-three" aria-expanded="false" aria-controls="collapse-three">
-                        Accordion heading 3
-                    </a>
-                </h4>
-            </div>
-            <div id="collapse-three" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapse-heading-three">
-                <div class="panel-body">
-                    Suspendisse ullamcorper massa eget eleifend iaculis.
                 </div>
             </div>
         </div>

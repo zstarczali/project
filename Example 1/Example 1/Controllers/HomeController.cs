@@ -12,6 +12,7 @@ namespace WebApplication5.Controllers
     public class HomeController : Controller
     {
         private List<string> CurrencyCodes = new List<string>();
+        private Dictionary<string, double> Currencies = new Dictionary<string, double>();
 
         [HttpGet]
         public ActionResult Index()
@@ -48,7 +49,10 @@ namespace WebApplication5.Controllers
                     foreach (XmlNode nn in n)
                     {
                         string currency = nn.Attributes["currency"].Value;
+                        double rate = double.Parse(nn.Attributes["rate"].Value, System.Globalization.CultureInfo.InvariantCulture);
+
                         CurrencyCodes.Add(currency);
+                        Currencies.Add(currency, rate);
                     }
                 }
             }
@@ -101,10 +105,9 @@ namespace WebApplication5.Controllers
         }
 
         [HttpPost]
-        public ActionResult Convert()
+        public ActionResult ConvertCurrency()
         {
             return Content("kukk", "text/html");
-            ;
         }
 
     }
