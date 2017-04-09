@@ -100,5 +100,12 @@ namespace WebApplication5.Controllers
             return ht;
         }
 
+        [HttpPost]
+        public ActionResult Convert()
+        {
+            return Content("kukk", "text/html");
+            ;
+        }
+
     }
 }
