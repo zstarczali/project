@@ -13,51 +13,68 @@ namespace WebApplication5.Controllers
     {
         private List<string> CurrencyCodes = new List<string>();
         private Dictionary<string, double> Currencies = new Dictionary<string, double>();
+        private XmlDocument doc1 = new XmlDocument();
+        private XmlNamespaceManager nsMgr;
+        private ICollection<string> items = new List<string>();
 
         [HttpGet]
         public ActionResult Index()
         {
             ViewBag.Message = "";
-            ICollection<string> items = new List<string>();
-            string url = "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml";
-            XmlDocument doc1 = new XmlDocument();
-            XmlNamespaceManager nsMgr = new XmlNamespaceManager(doc1.NameTable);
-
-            Task t = new Task(() =>
+            try
             {
-                doc1.Load(url);
-                nsMgr.AddNamespace("x", "http://www.ecb.int/vocabulary/2002-08-01/eurofxref");
-                nsMgr.AddNamespace("gemses", "http://www.gesmes.org/xml/2002-08-01");
-            });
 
-            t.Start();
-            t.Wait();
 
-            XmlElement root = doc1.DocumentElement;
+                string url = "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml";
+                nsMgr = new XmlNamespaceManager(doc1.NameTable);
 
-            XmlNodeList nodes = root.SelectNodes("x:Cube/x:Cube", nsMgr);
-            foreach (XmlNode node in nodes)
-            {
-                string time = node.Attributes["time"].Value;
-                items.Add(time);
-
-                var n = node.SelectNodes("x:Cube", nsMgr);
-                if (CurrencyCodes.Count == 0)
+                Task t = new Task(() =>
                 {
-                    // add missing part to currencies
-                    CurrencyCodes.Add("EUR");
-                    foreach (XmlNode nn in n)
-                    {
-                        string currency = nn.Attributes["currency"].Value;
-                        double rate = double.Parse(nn.Attributes["rate"].Value, System.Globalization.CultureInfo.InvariantCulture);
+                    doc1.Load(url);
+                    nsMgr.AddNamespace("x", "http://www.ecb.int/vocabulary/2002-08-01/eurofxref");
+                    nsMgr.AddNamespace("gemses", "http://www.gesmes.org/xml/2002-08-01");
+                });
 
-                        CurrencyCodes.Add(currency);
-                        Currencies.Add(currency, rate);
+
+                t.Start();
+                t.Wait();
+
+                XmlElement root = doc1.DocumentElement;
+
+                XmlNodeList nodes = root.SelectNodes("x:Cube/x:Cube", nsMgr);
+                foreach (XmlNode node in nodes)
+                {
+                    string time = node.Attributes["time"].Value;
+                    items.Add(time);
+
+                    var n = node.SelectNodes("x:Cube", nsMgr);
+                    if (CurrencyCodes.Count == 0)
+                    {
+                        // add missing part to currencies
+                        CurrencyCodes.Add("EUR");
+                        foreach (XmlNode nn in n)
+                        {
+                            string currency = nn.Attributes["currency"].Value;
+                            double rate = double.Parse(nn.Attributes["rate"].Value, System.Globalization.CultureInfo.InvariantCulture);
+
+                            CurrencyCodes.Add(currency);
+                            Currencies.Add(currency, rate);
+                        }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+
+            }
             ViewBag.data = items;
             return View();
+        }
+
+
+        private void done(Task tsk)
+        {
+
         }
 
         [HttpGet]
@@ -73,41 +90,49 @@ namespace WebApplication5.Controllers
             // https://gist.github.com/bzerangue/5484282
             // or
             // https://www.currency-iso.org/dam/downloads/lists/list_one.xml
-
             var ht = new Dictionary<string, string>();
-            string url = "https://www.currency-iso.org/dam/downloads/lists/list_one.xml";
-            XmlDocument doc1 = new XmlDocument();
-            doc1.Load(url);
-            XmlElement root = doc1.DocumentElement;
-
-            XmlNodeList nodes = root.SelectNodes("CcyTbl/CcyNtry");
-            foreach (string code in codes)
+            try
             {
-                foreach (XmlNode node in nodes)
+                string url = "https://www.currency-iso.org/dam/downloads/lists/list_one.xml";
+                XmlDocument doc1 = new XmlDocument();
+                doc1.Load(url);
+                XmlElement root = doc1.DocumentElement;
+
+                XmlNodeList nodes = root.SelectNodes("CcyTbl/CcyNtry");
+
+                foreach (string code in codes)
                 {
-                    try
+                    foreach (XmlNode node in nodes)
                     {
-                        var Ccy = node.SelectSingleNode("Ccy").InnerText;
-                        if (string.Compare(code, Ccy, true) == 0)
+                        try
                         {
-                            var CcyNm = node.SelectSingleNode("CcyNm").InnerText;
-                            ht.Add(code, CcyNm);
-                            break;
+                            var Ccy = node.SelectSingleNode("Ccy").InnerText;
+                            if (string.Compare(code, Ccy, true) == 0)
+                            {
+                                var CcyNm = node.SelectSingleNode("CcyNm").InnerText;
+                                ht.Add(code, CcyNm);
+                                break;
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            //...
                         }
                     }
-                    catch (Exception)
-                    {
-                        //...
-                    }
                 }
+            }
+
+            catch (Exception)
+            {
+
             }
             return ht;
         }
 
         [HttpPost]
-        public ActionResult ConvertCurrency()
+        public ActionResult ConvertCurrency(String param1, String param2)
         {
-            return Content("kukk", "text/html");
+            return Content(param1 + param2, "text/html");
         }
 
     }

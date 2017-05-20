@@ -11,6 +11,10 @@
     <script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 }
 
+@Scripts.Render("~/Scripts/vendor/d3.v2.js");
+@Scripts.Render("~/Scripts/rickshaw.js");
+
+
 <script>
     var onSuccess = function (data) {
         $("#Text2").val(data);
@@ -20,7 +24,7 @@
     }
 </script>
 
-@using (Ajax.BeginForm("ConvertCurrency", "Home", null, new AjaxOptions
+@using (Ajax.BeginForm("ConvertCurrency", "Home", new { param1 = Html.TextBox("text1"), param2=20 }, new AjaxOptions
 {
     HttpMethod = "POST",
     OnSuccess = "onSuccess",
@@ -106,6 +110,26 @@
                         </tr>
                     </table>
                     <input class="btn btn-default" id="Button1" type="button" value="Convert" />
+                    <div id="chart"></div> 
+                    
+                    <script>
+                        var graph = new Rickshaw.Graph({
+                            element: document.querySelector("#chart"),
+                            width: 300,
+                            height: 200,
+                            renderer: 'line',
+                            series: [{
+                                color: 'steelblue',
+                                data: [
+                                    { x: 0, y: 40 },
+                                    { x: 1, y: 49 },
+                                    { x: 2, y: 38 },
+                                    { x: 3, y: 30 },
+                                    { x: 4, y: 32 }]
+                            }]
+                        });
+                        graph.render();
+                    </script> 
                 </div>
             </div>
         </div>
