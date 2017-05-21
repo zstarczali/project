@@ -11,8 +11,17 @@
     <script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 }
 
-@Scripts.Render("~/Scripts/vendor/d3.v2.js");
-@Scripts.Render("~/Scripts/rickshaw.js");
+@Scripts.Render("~/Scripts/vendor/d3.v2.js")
+@Scripts.Render("~/Scripts/rickshaw.js")
+
+@functions {
+
+    string test()
+    {
+        return "test1234";
+    }
+
+}
 
 
 <script>
@@ -22,9 +31,13 @@
     function FailMessage() {
         alert("Fail Post");
     }
+
+    function test1234() {
+        return 111;
+    }
 </script>
 
-@using (Ajax.BeginForm("ConvertCurrency", "Home", new { param1 = Html.TextBox("text1"), param2=20 }, new AjaxOptions
+@using (Ajax.BeginForm("ConvertCurrency", "Home", new { id = "some" }, new AjaxOptions
 {
     HttpMethod = "POST",
     OnSuccess = "onSuccess",
@@ -32,105 +45,109 @@
     UpdateTargetId = "Text2"
 }, new { id = "MyNewNameId" })) // set new Id name for  Form
 {
-    <input class="btn btn-default" type="submit" value="Convert" />
-}
-<div class="panel-group" id="collapse" role="tablist" aria-multiselectable="true">
-    <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="collapse-heading-one">
-            <h4 class="panel-title">
-                <a role="button" data-toggle="collapse" data-parent="#collapse" href="#collapse-one" aria-expanded="true" aria-controls="collapse-one">
-                    Select period
-                </a>
-            </h4>
-        </div>
-        <div id="collapse-one" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapse-heading-one">
-            <div class="panel-body" style="height:200px;">
-                <select id="Select1" class="form-control">
-                    @foreach (var item in ViewBag.data)
-                    {
-                        <option>@item</option>
-                    }
-                </select>
+    <div class="panel-group" id="collapse" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="collapse-heading-one">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#collapse" href="#collapse-one" aria-expanded="true" aria-controls="collapse-one">
+                        Select period
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse-one" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapse-heading-one">
+                <div class="panel-body" style="height:200px;">
+                    <select id="Select1" class="form-control">
+                        @foreach (var item in ViewBag.data)
+                        {
+                            <option>@item</option>
+                        }
+                    </select>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="collapse-heading-two">
-            <h4 class="panel-title">
-                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#collapse" href="#collapse-two" aria-expanded="false" aria-controls="collapse-two">
-                    Change currency
-                </a>
-            </h4>
-        </div>
-        <div id="collapse-two" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapse-heading-two">
-            <div class="panel-body" style="height:350px;">
-                <div class="form-group">
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="form-group">
-                                    <label class="control-label" for="form-group-select">Amount</label>
-                                    <input class="form-control" id="Text1" type="text" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <label class="control-label" for="form-group-select">Currency</label>
-                                    <select id="Select2" class="form-control">
-                                        @{
-                                            var ccode = ((HomeController)this.ViewContext.Controller).GetCurrencyCodes();
-                                            var currencies = ((HomeController)this.ViewContext.Controller).GetCurrencyNameFromCode(ccode);
-                                        }
-                                        @foreach (var item in currencies)
-                                        {
-                                            <option>@item.Value</option>
-                                        }
-                                    </select>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-group">
-                                    <label class="control-label" for="form-group-select">My label</label>
-                                    <input class="form-control" id="Text2" type="text" disabled />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <label class="control-label" for="form-group-select">Currency</label>
-                                    <select class="form-control" id="Select3">
-                                        @foreach (var item in currencies)
-                                        {
-                                            <option>@item.Value</option>
-                                        }
-                                    </select>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <input class="btn btn-default" id="Button1" type="button" value="Convert" />
-                    <div id="chart"></div> 
-                    
-                    <script>
-                        var graph = new Rickshaw.Graph({
-                            element: document.querySelector("#chart"),
-                            width: 300,
-                            height: 200,
-                            renderer: 'line',
-                            series: [{
-                                color: 'steelblue',
-                                data: [
-                                    { x: 0, y: 40 },
-                                    { x: 1, y: 49 },
-                                    { x: 2, y: 38 },
-                                    { x: 3, y: 30 },
-                                    { x: 4, y: 32 }]
-                            }]
-                        });
-                        graph.render();
-                    </script> 
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="collapse-heading-two">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#collapse" href="#collapse-two" aria-expanded="false" aria-controls="collapse-two">
+                        Change currency
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse-two" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapse-heading-two">
+                <div class="panel-body" style="height:350px;">
+                    <div class="form-group">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.Label("Amount", new { @class = "control-label" })
+                                        @Html.TextBox("iname", null, new { @class = "form-control", required = "required", type = "number" })
+                                        @Html.ValidationMessage("decimal")
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="control-label" for="form-group-select">Currency</label>
+                                        <select id="Select2" class="form-control">
+                                            @{
+                                                var ccode = ((HomeController)this.ViewContext.Controller).GetCurrencyCodes();
+                                                var currencies = ((HomeController)this.ViewContext.Controller).GetCurrencyNameFromCode(ccode);
+                                            }
+                                            @foreach (var item in currencies)
+                                            {
+                                                <option>@item.Value</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="control-label" for="form-group-select">My label</label>
+                                        <input class="form-control" id="Text2" type="text" disabled />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="control-label" for="form-group-select">Currency</label>
+                                        <select class="form-control" id="Select3">
+                                            @foreach (var item in currencies)
+                                            {
+                                                <option>@item.Value</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <input class="btn btn-default" type="submit" value="Convert" />
+                        <div id="chart"></div>
+
+                        <script>
+                            var graph = new Rickshaw.Graph({
+                                element: document.querySelector("#chart"),
+                                width: 300,
+                                height: 200,
+                                renderer: 'line',
+
+                                series: [{
+                                    color: 'steelblue',
+                                    data: [
+                                        { x: 0, y: 10 },
+                                        { x: 1, y: 20 },
+                                        { x: 2, y: 30 },
+                                        { x: 3, y: 40 },
+                                        { x: 4, y: 50 }]
+                                }],
+                                name:'kukk'
+                            });
+                            graph.render();
+                        </script>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+}

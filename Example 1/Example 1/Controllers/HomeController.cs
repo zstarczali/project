@@ -13,8 +13,6 @@ namespace WebApplication5.Controllers
     {
         private List<string> CurrencyCodes = new List<string>();
         private Dictionary<string, double> Currencies = new Dictionary<string, double>();
-        private XmlDocument doc1 = new XmlDocument();
-        private XmlNamespaceManager nsMgr;
         private ICollection<string> items = new List<string>();
 
         [HttpGet]
@@ -23,10 +21,9 @@ namespace WebApplication5.Controllers
             ViewBag.Message = "";
             try
             {
-
-
                 string url = "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml";
-                nsMgr = new XmlNamespaceManager(doc1.NameTable);
+                XmlDocument doc1 = new XmlDocument();
+                XmlNamespaceManager nsMgr = new XmlNamespaceManager(doc1.NameTable);
 
                 Task t = new Task(() =>
                 {
@@ -67,14 +64,15 @@ namespace WebApplication5.Controllers
             {
 
             }
+            //this.Session["itemms"] = items;
+
+            HttpContext.Session.Add("items", items);
+            HttpContext.Session.Add("CurrencyCodes", CurrencyCodes);
+            HttpContext.Session.Add("Currencies", Currencies);
+
+
             ViewBag.data = items;
             return View();
-        }
-
-
-        private void done(Task tsk)
-        {
-
         }
 
         [HttpGet]
@@ -130,10 +128,19 @@ namespace WebApplication5.Controllers
         }
 
         [HttpPost]
-        public ActionResult ConvertCurrency(String param1, String param2)
+        public ActionResult ConvertCurrency(string iname)
         {
-            return Content(param1 + param2, "text/html");
+            int total = 0;
+            try
+            {
+                int num = Convert.ToInt32(iname);
+                total = num * 2;
+            }
+            catch (Exception)
+            {
+                return Content("", "text/html");
+            }
+            return Content(total.ToString(), "text/html");
         }
-
     }
 }
