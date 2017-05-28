@@ -11,9 +11,10 @@ namespace WebApplication5.Controllers
 {
     public class HomeController : Controller
     {
+        private Dictionary<string, string> CurrencyNamesAndCodes = new Dictionary<string, string>();
         private List<string> CurrencyCodes = new List<string>();
         private Dictionary<string, double> Currencies = new Dictionary<string, double>();
-        private ICollection<string> items = new List<string>();
+        private ICollection<string> history = new List<string>();
 
         [HttpGet]
         public ActionResult Index()
@@ -42,13 +43,15 @@ namespace WebApplication5.Controllers
                 foreach (XmlNode node in nodes)
                 {
                     string time = node.Attributes["time"].Value;
-                    items.Add(time);
+                    history.Add(time);
 
                     var n = node.SelectNodes("x:Cube", nsMgr);
                     if (CurrencyCodes.Count == 0)
                     {
                         // add missing part to currencies
                         CurrencyCodes.Add("EUR");
+                        Currencies.Add("EUR", 1);
+
                         foreach (XmlNode nn in n)
                         {
                             string currency = nn.Attributes["currency"].Value;
@@ -64,15 +67,41 @@ namespace WebApplication5.Controllers
             {
 
             }
-            //this.Session["itemms"] = items;
 
-            HttpContext.Session.Add("items", items);
-            HttpContext.Session.Add("CurrencyCodes", CurrencyCodes);
-            HttpContext.Session.Add("Currencies", Currencies);
+            this.CurrencyNamesAndCodes = GetCurrencyNameFromCode(CurrencyCodes);
 
 
-            ViewBag.data = items;
+            saveState();
+
+            ViewBag.history = history;
             return View();
+        }
+
+        public void saveState()
+        {
+            HttpContext.Session.Add("history", this.history);
+            HttpContext.Session.Add("CurrencyCodes", this.CurrencyCodes);
+            HttpContext.Session.Add("Currencies", this.Currencies);
+            HttpContext.Session.Add("CurrencyNamesAndCodes", CurrencyNamesAndCodes);
+        }
+
+        public void loadState()
+        {
+            this.CurrencyNamesAndCodes = HttpContext.Session["CurrencyNamesAndCodes"] as Dictionary<string, string>;
+            this.Currencies = HttpContext.Session["Currencies"] as Dictionary<string, double>;
+        }
+
+        public string getCurrencyCode(string currencyCode)
+        {
+            try
+            {
+                this.loadState();
+                return this.CurrencyNamesAndCodes[currencyCode];
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
         }
 
         [HttpGet]
@@ -108,7 +137,7 @@ namespace WebApplication5.Controllers
                             if (string.Compare(code, Ccy, true) == 0)
                             {
                                 var CcyNm = node.SelectSingleNode("CcyNm").InnerText;
-                                ht.Add(code, CcyNm);
+                                ht.Add(CcyNm, code);
                                 break;
                             }
                         }
@@ -128,19 +157,47 @@ namespace WebApplication5.Controllers
         }
 
         [HttpPost]
-        public ActionResult ConvertCurrency(string iname)
+        public ActionResult ConvertCurrency(string iname, string from, string to)
         {
-            int total = 0;
+            double currency;
+            double total;
+
             try
             {
-                int num = Convert.ToInt32(iname);
-                total = num * 2;
+                double.TryParse(iname.Replace('.', ','), out currency);
+
+                total = this.convert(currency, from, to);
             }
             catch (Exception)
             {
                 return Content("", "text/html");
             }
             return Content(total.ToString(), "text/html");
+        }
+
+        public double convert(double value, string from, string to)
+        {
+            try
+            {
+                if (value == 0) return 0;
+
+
+                string fromCurrency = this.getCurrencyCode(from);
+                string toCurrency = this.getCurrencyCode(to);
+                double fromcurrency = Convert.ToDouble(this.Currencies[fromCurrency]);
+                double fromvalue = value;
+
+                double tocurrency = Convert.ToDouble(this.Currencies[toCurrency]);
+
+                double baseval = fromcurrency * value; // value in EUR
+                return (tocurrency > fromcurrency && fromvalue < 1) ? tocurrency / baseval : baseval * tocurrency;
+
+
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
         }
     }
 }

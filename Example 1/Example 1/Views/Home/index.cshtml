@@ -57,7 +57,7 @@
             <div id="collapse-one" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapse-heading-one">
                 <div class="panel-body" style="height:200px;">
                     <select id="Select1" class="form-control">
-                        @foreach (var item in ViewBag.data)
+                        @foreach (var item in ViewBag.history)
                         {
                             <option>@item</option>
                         }
@@ -81,21 +81,21 @@
                                 <td>
                                     <div class="form-group">
                                         @Html.Label("Amount", new { @class = "control-label" })
-                                        @Html.TextBox("iname", null, new { @class = "form-control", required = "required", type = "number" })
-                                        @Html.ValidationMessage("decimal")
+                                        @Html.TextBox("iname", null, new { @class = "form-control", required = "required", type = "number", step = "0.01" })
+                                        @*@Html.ValidationMessage("decimal")*@
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
                                         <label class="control-label" for="form-group-select">Currency</label>
-                                        <select id="Select2" class="form-control">
+                                        <select id="from" name="from" class="form-control">
                                             @{
                                                 var ccode = ((HomeController)this.ViewContext.Controller).GetCurrencyCodes();
                                                 var currencies = ((HomeController)this.ViewContext.Controller).GetCurrencyNameFromCode(ccode);
                                             }
                                             @foreach (var item in currencies)
                                             {
-                                                <option>@item.Value</option>
+                                                <option>@item.Key</option>
                                             }
                                         </select>
                                     </div>
@@ -111,10 +111,10 @@
                                 <td>
                                     <div class="form-group">
                                         <label class="control-label" for="form-group-select">Currency</label>
-                                        <select class="form-control" id="Select3">
+                                        <select class="form-control" id="to" name="to">
                                             @foreach (var item in currencies)
                                             {
-                                                <option>@item.Value</option>
+                                                <option>@item.Key</option>
                                             }
                                         </select>
                                     </div>
