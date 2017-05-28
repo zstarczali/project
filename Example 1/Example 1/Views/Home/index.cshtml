@@ -18,8 +18,14 @@
 <script>
     var chartData = [];
 
+    var clearChart = function () {
+        $("#chart").empty();
+        $('#chart_container').html('<div id="chart"></div>');
+    }
+
     var onSuccess = function (data) {
-        $("#Text2").innerText
+        $("#Text2").val(data.convertedCurrency);
+        //clearChart();
         chartData.push({
             data: data.chartData,
             color: "#6060c0"
@@ -52,7 +58,7 @@
                 <td>
                     <div class="form-group">
                         @Html.Label("Amount", new { @class = "control-label" })
-                        @Html.TextBox("iname", null, new { @class = "form-control", required = "required", type = "number", step = "0.01" })
+                        @Html.TextBox("amount", null, new { @class = "form-control", required = "required", type = "number", step = "0.01" })
                     </div>
                 </td>
                 <td>
@@ -94,7 +100,9 @@
         <input class="btn btn-default" type="submit" value="Convert" />
 
         <div id="ccaption" class="control-label" style="padding-top:15px;padding-bottom:5px;"></div>
-        <div id="chart"></div>
+        <div id="chart_container">
+            <div id="chart"></div>
+        </div>
 
         <script>
             var graph = new Rickshaw.Graph({

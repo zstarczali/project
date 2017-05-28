@@ -174,14 +174,14 @@ namespace WebApplication5.Controllers
         }
 
         [HttpPost]
-        public ActionResult ConvertCurrency(string iname, string from, string to)
+        public ActionResult ConvertCurrency(string amount, string from, string to)
         {
             double currency;
             double total;
 
             try
             {
-                double.TryParse(iname.Replace('.', ','), out currency);
+                double.TryParse(amount.Replace('.', ','), out currency);
 
                 total = this.convert(currency, from, to);
                 Chart chart = this.collectChartData(currency, from, to, total.ToString());
