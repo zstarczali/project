@@ -262,6 +262,6 @@ C:\Users\lenovo\Documents\project\Example 1\Example 1\bin\Microsoft.AI.Dependenc
 C:\Users\lenovo\Documents\project\Example 1\Example 1\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\lenovo\Documents\project\Example 1\Example 1\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\lenovo\Documents\project\Example 1\Example 1\bin\Microsoft.AI.Web.xml
-C:\Users\lenovo\Documents\project\Example 1\Example 1\obj\Debug\Example 1.csprojResolveAssemblyReference.cache
 C:\Users\lenovo\Documents\project\Example 1\Example 1\obj\Debug\WebApplication5.dll
 C:\Users\lenovo\Documents\project\Example 1\Example 1\obj\Debug\WebApplication5.pdb
+C:\Users\lenovo\Documents\project\Example 1\Example 1\obj\Debug\Example 1.csprojResolveAssemblyReference.cache

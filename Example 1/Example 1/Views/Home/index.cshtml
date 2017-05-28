@@ -19,11 +19,16 @@
     var chartData = [];
 
     var onSuccess = function (data) {
-        $("#Text2").val(data.convertedCurrency);
+        $("#Text2").innerText
         chartData.push({
             data: data.chartData,
             color: "#6060c0"
         });
+
+        $("#ccaption").html("<b>" + $("#from option:selected").text() + " to " + $("#to option:selected").text() + " chart</b>");
+        graph.min = 250;
+        graph.max = 300;
+        graph.render();
         graph.update();
     }
     function FailMessage() {
@@ -87,6 +92,8 @@
             </tr>
         </table>
         <input class="btn btn-default" type="submit" value="Convert" />
+
+        <div id="ccaption" class="control-label" style="padding-top:15px;padding-bottom:5px;"></div>
         <div id="chart"></div>
 
         <script>
@@ -94,7 +101,10 @@
                 element: document.querySelector("#chart"),
                 width: 300,
                 height: 200,
+                min: 300,
+                max: 320,
                 renderer: 'line',
+                pixelsPerTick: 100,
                 series: chartData
             });
             graph.render();

@@ -7,8 +7,8 @@ namespace WebApplication5.Models
 {
     public class ChartItem
     {
-        public int x { get; set; }
+        public double x { get; set; }
 
-        public int y { get; set; }
+        public double y { get; set; }
     }
 }

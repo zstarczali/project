@@ -65,12 +65,13 @@ namespace WebApplication5.Controllers
                             Currencies.Add(currency, rate);
                         }
                         history.Add(day++, Currencies);
-
                     }
                     else
                     {
 
                         Dictionary<string, double> currencies = new Dictionary<string, double>();
+                        currencies.Add("EUR", 1);
+
                         foreach (XmlNode nn in n)
                         {
                             string currency = nn.Attributes["currency"].Value;
@@ -82,9 +83,8 @@ namespace WebApplication5.Controllers
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
             }
 
             this.CurrencyNamesAndCodes = GetCurrencyNameFromCode(CurrencyCodes);
@@ -99,7 +99,6 @@ namespace WebApplication5.Controllers
         public void saveState()
         {
             HttpContext.Session.Add("history", this.history);
-            HttpContext.Session.Add("CurrencyCodes", this.CurrencyCodes);
             HttpContext.Session.Add("Currencies", this.Currencies);
             HttpContext.Session.Add("CurrencyNamesAndCodes", CurrencyNamesAndCodes);
         }
@@ -163,7 +162,6 @@ namespace WebApplication5.Controllers
                         }
                         catch (Exception)
                         {
-                            //...
                         }
                     }
                 }
@@ -171,7 +169,6 @@ namespace WebApplication5.Controllers
 
             catch (Exception)
             {
-
             }
             return ht;
         }
@@ -187,7 +184,7 @@ namespace WebApplication5.Controllers
                 double.TryParse(iname.Replace('.', ','), out currency);
 
                 total = this.convert(currency, from, to);
-                Chart chart = this.collectChartData(total.ToString());
+                Chart chart = this.collectChartData(currency, from, to, total.ToString());
                 var serializer = new JavaScriptSerializer();
                 var serializedResult = serializer.Serialize(chart);
 
@@ -199,20 +196,28 @@ namespace WebApplication5.Controllers
             }
         }
 
-        public Chart collectChartData(string retValue)
+        public Chart collectChartData(double value, string from, string to, string retValue)
         {
+            string fromCurrency = this.getCurrencyCode(from);
+            string toCurrency = this.getCurrencyCode(to);
             Chart chart = new Chart(retValue);
 
-            chart.chartData.Add(new ChartItem { x = 1, y = 100 });
-            chart.chartData.Add(new ChartItem { x = 2, y = 100 });
-            chart.chartData.Add(new ChartItem { x = 3, y = 200 });
-            chart.chartData.Add(new ChartItem { x = 4, y = 400 });
-            chart.chartData.Add(new ChartItem { x = 5, y = 200 });
+            foreach (var item in this.history)
+            {
+                int time = item.Key;
+                var currencies = item.Value;
+                var cfrom = currencies[fromCurrency];
+                var cto = currencies[toCurrency];
+                var total = this.convert(value, from, to, currencies);
+
+                chart.chartData.Add(new ChartItem { x = time, y = total });
+            }
+
 
             return chart;
         }
 
-        public double convert(double value, string from, string to)
+        public double convert(double value, string from, string to, Dictionary<string, double> currencies = null)
         {
             try
             {
@@ -220,9 +225,9 @@ namespace WebApplication5.Controllers
 
                 string fromCurrency = this.getCurrencyCode(from);
                 string toCurrency = this.getCurrencyCode(to);
-                double oneEURValue = Convert.ToDouble(this.Currencies[fromCurrency]);
+                double oneEURValue = currencies != null ? Convert.ToDouble(currencies[fromCurrency]) : Convert.ToDouble(this.Currencies[fromCurrency]);
                 double fromValInEUR = value / oneEURValue;
-                double toCurrencyNum = Convert.ToDouble(this.Currencies[toCurrency]);
+                double toCurrencyNum = currencies != null ? Convert.ToDouble(currencies[toCurrency]) : Convert.ToDouble(this.Currencies[toCurrency]);
                 double toValInEUR = 1 / toCurrencyNum;
                 return fromValInEUR / toValInEUR;
             }
