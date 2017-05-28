@@ -5,9 +5,10 @@ using System.Web;
 
 namespace WebApplication5.Models
 {
-    public class Class1
+    public class ChartItem
     {
-        public int test { get; set; }
+        public int x { get; set; }
 
+        public int y { get; set; }
     }
 }

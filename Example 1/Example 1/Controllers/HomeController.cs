@@ -5,16 +5,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using System.Xml;
+using WebApplication5.Models;
 
 namespace WebApplication5.Controllers
 {
+
     public class HomeController : Controller
     {
+
         private Dictionary<string, string> CurrencyNamesAndCodes = new Dictionary<string, string>();
         private List<string> CurrencyCodes = new List<string>();
+        private Dictionary<int, Dictionary<string, double>> history = new Dictionary<int, Dictionary<string, double>>();
         private Dictionary<string, double> Currencies = new Dictionary<string, double>();
-        private ICollection<string> history = new List<string>();
+        private List<ChartItem> chart = new List<ChartItem>();
 
         [HttpGet]
         public ActionResult Index()
@@ -38,12 +43,11 @@ namespace WebApplication5.Controllers
                 t.Wait();
 
                 XmlElement root = doc1.DocumentElement;
-
+                int day = 1;
                 XmlNodeList nodes = root.SelectNodes("x:Cube/x:Cube", nsMgr);
                 foreach (XmlNode node in nodes)
                 {
                     string time = node.Attributes["time"].Value;
-                    history.Add(time);
 
                     var n = node.SelectNodes("x:Cube", nsMgr);
                     if (CurrencyCodes.Count == 0)
@@ -60,6 +64,21 @@ namespace WebApplication5.Controllers
                             CurrencyCodes.Add(currency);
                             Currencies.Add(currency, rate);
                         }
+                        history.Add(day++, Currencies);
+
+                    }
+                    else
+                    {
+
+                        Dictionary<string, double> currencies = new Dictionary<string, double>();
+                        foreach (XmlNode nn in n)
+                        {
+                            string currency = nn.Attributes["currency"].Value;
+                            double rate = double.Parse(nn.Attributes["rate"].Value, System.Globalization.CultureInfo.InvariantCulture);
+                            currencies.Add(currency, rate);
+                        }
+                        history.Add(day++, currencies);
+
                     }
                 }
             }
@@ -89,6 +108,7 @@ namespace WebApplication5.Controllers
         {
             this.CurrencyNamesAndCodes = HttpContext.Session["CurrencyNamesAndCodes"] as Dictionary<string, string>;
             this.Currencies = HttpContext.Session["Currencies"] as Dictionary<string, double>;
+            this.history = HttpContext.Session["history"] as Dictionary<int, Dictionary<string, double>>;
         }
 
         public string getCurrencyCode(string currencyCode)
@@ -167,12 +187,29 @@ namespace WebApplication5.Controllers
                 double.TryParse(iname.Replace('.', ','), out currency);
 
                 total = this.convert(currency, from, to);
+                Chart chart = this.collectChartData(total.ToString());
+                var serializer = new JavaScriptSerializer();
+                var serializedResult = serializer.Serialize(chart);
+
+                return Content(serializedResult, "application/json");
             }
             catch (Exception)
             {
                 return Content("", "text/html");
             }
-            return Content(total.ToString(), "text/html");
+        }
+
+        public Chart collectChartData(string retValue)
+        {
+            Chart chart = new Chart(retValue);
+
+            chart.chartData.Add(new ChartItem { x = 1, y = 100 });
+            chart.chartData.Add(new ChartItem { x = 2, y = 100 });
+            chart.chartData.Add(new ChartItem { x = 3, y = 200 });
+            chart.chartData.Add(new ChartItem { x = 4, y = 400 });
+            chart.chartData.Add(new ChartItem { x = 5, y = 200 });
+
+            return chart;
         }
 
         public double convert(double value, string from, string to)
