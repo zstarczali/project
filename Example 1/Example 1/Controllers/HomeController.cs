@@ -181,18 +181,13 @@ namespace WebApplication5.Controllers
             {
                 if (value == 0) return 0;
 
-
                 string fromCurrency = this.getCurrencyCode(from);
                 string toCurrency = this.getCurrencyCode(to);
-                double fromcurrency = Convert.ToDouble(this.Currencies[fromCurrency]);
-                double fromvalue = value;
-
-                double tocurrency = Convert.ToDouble(this.Currencies[toCurrency]);
-
-                double baseval = fromcurrency * value; // value in EUR
-                return (tocurrency > fromcurrency && fromvalue < 1) ? tocurrency / baseval : baseval * tocurrency;
-
-
+                double oneEURValue = Convert.ToDouble(this.Currencies[fromCurrency]);
+                double fromValInEUR = value / oneEURValue;
+                double toCurrencyNum = Convert.ToDouble(this.Currencies[toCurrency]);
+                double toValInEUR = 1 / toCurrencyNum;
+                return fromValInEUR / toValInEUR;
             }
             catch (Exception)
             {
