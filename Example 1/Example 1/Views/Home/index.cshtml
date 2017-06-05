@@ -24,20 +24,20 @@
 
     var onSuccess = function (data) {
         clearChart();
-        $("#Text2").val(data.convertedCurrency);
+        $("#result").val(data.convertedCurrency);
         chartData.push({
             data: data.chartData,
             color: "#6060c0",
-            name: $("#to option:selected").text()
+            name: $("#from option:selected").text() + " / " + $("#to option:selected").text()
         });
 
-        $("#ccaption").html("<b>" + $("#from option:selected").text().toUpperCase() + " to " + $("#to option:selected").text().toUpperCase() + " chart</b>");
+        $("#ccaption").html("<b>" + $("#from option:selected").text().toUpperCase() + "</b> to <b>" + $("#to option:selected").text().toUpperCase() + "</b> chart");
         graph.min = data.min;
         graph.max = data.max;
         graph.render();
     }
     function FailMessage() {
-        $("#Text2").val(0);
+        $("#result").val(0);
     }
 
 </script>
@@ -79,8 +79,8 @@
             <tr>
                 <td>
                     <div class="form-group">
-                        <label class="control-label" for="form-group-select">My label</label>
-                        <input class="form-control" id="Text2" type="text" disabled />
+                        @Html.Label("Result", new { @class = "control-label" })
+                        @Html.TextBox("result", null, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </td>
                 <td>
@@ -110,10 +110,10 @@
         <script>
             var graph = new Rickshaw.Graph({
                 element: document.querySelector("#chart"),
-                width: 300,
-                height: 220,
-                min: 300,
-                max: 320,
+                width: 350,
+                height: 300,
+                min: 0,
+                max: 0,
                 renderer: 'line',
                 series: chartData
             });
