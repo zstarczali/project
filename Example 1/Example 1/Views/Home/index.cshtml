@@ -19,26 +19,25 @@
     var chartData = [];
 
     var clearChart = function () {
-        $("#chart").empty();
-        $('#chart_container').html('<div id="chart"></div>');
+        graph.series.splice(0, graph.series.length);
     }
 
     var onSuccess = function (data) {
+        clearChart();
         $("#Text2").val(data.convertedCurrency);
-        //clearChart();
         chartData.push({
             data: data.chartData,
-            color: "#6060c0"
+            color: "#6060c0",
+            name: $("#to option:selected").text()
         });
 
-        $("#ccaption").html("<b>" + $("#from option:selected").text() + " to " + $("#to option:selected").text() + " chart</b>");
-        graph.min = 250;
-        graph.max = 300;
+        $("#ccaption").html("<b>" + $("#from option:selected").text().toUpperCase() + " to " + $("#to option:selected").text().toUpperCase() + " chart</b>");
+        graph.min = data.min;
+        graph.max = data.max;
         graph.render();
-        graph.update();
     }
     function FailMessage() {
-        alert("Fail Post");
+        $("#Text2").val(0);
     }
 
 </script>
@@ -102,20 +101,40 @@
         <div id="ccaption" class="control-label" style="padding-top:15px;padding-bottom:5px;"></div>
         <div id="chart_container">
             <div id="chart"></div>
+            <div id="legend_container">
+                <div id="smoother" title="Smoothing"></div>
+            </div>
+            <div id="slider"></div>
         </div>
 
         <script>
             var graph = new Rickshaw.Graph({
                 element: document.querySelector("#chart"),
                 width: 300,
-                height: 200,
+                height: 220,
                 min: 300,
                 max: 320,
                 renderer: 'line',
-                pixelsPerTick: 100,
                 series: chartData
             });
+
+            new Rickshaw.Graph.HoverDetail({
+                graph: graph
+            });
+
             graph.render();
+
+            var hoverDetail = new Rickshaw.Graph.HoverDetail({
+                graph: graph
+            });
+
+            var ticksTreatment = 'glow';
+            var xAxis = new Rickshaw.Graph.Axis.Time({
+                graph: graph,
+                ticksTreatment: ticksTreatment,
+                timeFixture: new Rickshaw.Fixtures.Time.Local()
+            });
+            xAxis.render();
         </script>
     </div>
 

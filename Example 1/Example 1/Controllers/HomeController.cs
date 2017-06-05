@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -11,15 +12,23 @@ using WebApplication5.Models;
 
 namespace WebApplication5.Controllers
 {
-
     public class HomeController : Controller
     {
 
         private Dictionary<string, string> CurrencyNamesAndCodes = new Dictionary<string, string>();
         private List<string> CurrencyCodes = new List<string>();
-        private Dictionary<int, Dictionary<string, double>> history = new Dictionary<int, Dictionary<string, double>>();
+        private SortedDictionary<double, Dictionary<string, double>> history = new SortedDictionary<double, Dictionary<string, double>>();
         private Dictionary<string, double> Currencies = new Dictionary<string, double>();
         private List<ChartItem> chart = new List<ChartItem>();
+
+        public double ToJSDate(DateTime TheDate)
+        {
+            DateTime d1 = new DateTime(1970, 1, 1);
+            DateTime d2 = TheDate.ToUniversalTime();
+            TimeSpan ts = new TimeSpan(d2.Ticks - d1.Ticks);
+
+            return ts.TotalMilliseconds / 1000;
+        }
 
         [HttpGet]
         public ActionResult Index()
@@ -42,13 +51,15 @@ namespace WebApplication5.Controllers
                 t.Start();
                 t.Wait();
 
+
                 XmlElement root = doc1.DocumentElement;
-                int day = 1;
                 XmlNodeList nodes = root.SelectNodes("x:Cube/x:Cube", nsMgr);
                 foreach (XmlNode node in nodes)
                 {
-                    string time = node.Attributes["time"].Value;
+                    string time = node.Attributes["time"].Value + " 09:00:00";
+                    DateTime dt = DateTime.ParseExact(time, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
 
+                    long dateTime = Convert.ToInt64(this.ToJSDate(dt));
                     var n = node.SelectNodes("x:Cube", nsMgr);
                     if (CurrencyCodes.Count == 0)
                     {
@@ -64,11 +75,11 @@ namespace WebApplication5.Controllers
                             CurrencyCodes.Add(currency);
                             Currencies.Add(currency, rate);
                         }
-                        history.Add(day++, Currencies);
+
+                        history.Add(dateTime, Currencies);
                     }
                     else
                     {
-
                         Dictionary<string, double> currencies = new Dictionary<string, double>();
                         currencies.Add("EUR", 1);
 
@@ -78,7 +89,7 @@ namespace WebApplication5.Controllers
                             double rate = double.Parse(nn.Attributes["rate"].Value, System.Globalization.CultureInfo.InvariantCulture);
                             currencies.Add(currency, rate);
                         }
-                        history.Add(day++, currencies);
+                        history.Add(dateTime, currencies);
 
                     }
                 }
@@ -88,9 +99,7 @@ namespace WebApplication5.Controllers
             }
 
             this.CurrencyNamesAndCodes = GetCurrencyNameFromCode(CurrencyCodes);
-
-
-            saveState();
+            this.saveState();
 
             ViewBag.history = history;
             return View();
@@ -107,7 +116,7 @@ namespace WebApplication5.Controllers
         {
             this.CurrencyNamesAndCodes = HttpContext.Session["CurrencyNamesAndCodes"] as Dictionary<string, string>;
             this.Currencies = HttpContext.Session["Currencies"] as Dictionary<string, double>;
-            this.history = HttpContext.Session["history"] as Dictionary<int, Dictionary<string, double>>;
+            this.history = HttpContext.Session["history"] as SortedDictionary<double, Dictionary<string, double>>;
         }
 
         public string getCurrencyCode(string currencyCode)
@@ -166,7 +175,6 @@ namespace WebApplication5.Controllers
                     }
                 }
             }
-
             catch (Exception)
             {
             }
@@ -201,18 +209,22 @@ namespace WebApplication5.Controllers
             string fromCurrency = this.getCurrencyCode(from);
             string toCurrency = this.getCurrencyCode(to);
             Chart chart = new Chart(retValue);
+            double min = 0, max = 0;
 
             foreach (var item in this.history)
             {
-                int time = item.Key;
+                double time = item.Key;
                 var currencies = item.Value;
                 var cfrom = currencies[fromCurrency];
                 var cto = currencies[toCurrency];
-                var total = this.convert(value, from, to, currencies);
+                var total = cto;
 
+                min = total < min ? total : min == 0 ? total : min;
+                max = total > max ? total : max;
                 chart.chartData.Add(new ChartItem { x = time, y = total });
             }
-
+            chart.min = min;
+            chart.max = max;
 
             return chart;
         }
