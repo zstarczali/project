@@ -217,7 +217,7 @@ namespace WebApplication5.Controllers
                 var currencies = item.Value;
                 var cfrom = currencies[fromCurrency];
                 var cto = currencies[toCurrency];
-                var total = cto;
+                var total = this.convert(1,from,to,currencies);
 
                 min = total < min ? total : min == 0 ? total : min;
                 max = total > max ? total : max;
