@@ -12,6 +12,7 @@ using WebApplication5.Models;
 
 namespace WebApplication5.Controllers
 {
+    using Helper;
     public class HomeController : Controller
     {
 
@@ -21,14 +22,6 @@ namespace WebApplication5.Controllers
         private Dictionary<string, double> Currencies = new Dictionary<string, double>();
         private List<ChartItem> chart = new List<ChartItem>();
 
-        public double ToJSDate(DateTime TheDate)
-        {
-            DateTime d1 = new DateTime(1970, 1, 1);
-            DateTime d2 = TheDate.ToUniversalTime();
-            TimeSpan ts = new TimeSpan(d2.Ticks - d1.Ticks);
-
-            return ts.TotalMilliseconds / 1000;
-        }
 
         [HttpGet]
         public ActionResult Index()
@@ -59,7 +52,7 @@ namespace WebApplication5.Controllers
                     string time = node.Attributes["time"].Value + " 09:00:00";
                     DateTime dt = DateTime.ParseExact(time, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
 
-                    long dateTime = Convert.ToInt64(this.ToJSDate(dt));
+                    long dateTime = System.Convert.ToInt64(dt.ToJSDate());
                     var n = node.SelectNodes("x:Cube", nsMgr);
                     if (CurrencyCodes.Count == 0)
                     {
@@ -99,31 +92,31 @@ namespace WebApplication5.Controllers
             }
 
             this.CurrencyNamesAndCodes = GetCurrencyNameFromCode(CurrencyCodes);
-            this.saveState();
+            this.SaveState();
 
             ViewBag.history = history;
             return View();
         }
 
-        public void saveState()
+        public void SaveState()
         {
             HttpContext.Session.Add("history", this.history);
             HttpContext.Session.Add("Currencies", this.Currencies);
             HttpContext.Session.Add("CurrencyNamesAndCodes", CurrencyNamesAndCodes);
         }
 
-        public void loadState()
+        public void LoadState()
         {
             this.CurrencyNamesAndCodes = HttpContext.Session["CurrencyNamesAndCodes"] as Dictionary<string, string>;
             this.Currencies = HttpContext.Session["Currencies"] as Dictionary<string, double>;
             this.history = HttpContext.Session["history"] as SortedDictionary<double, Dictionary<string, double>>;
         }
 
-        public string getCurrencyCode(string currencyCode)
+        public string GetCurrencyCode(string currencyCode)
         {
             try
             {
-                this.loadState();
+                this.LoadState();
                 return this.CurrencyNamesAndCodes[currencyCode];
             }
             catch (Exception)
@@ -191,8 +184,8 @@ namespace WebApplication5.Controllers
             {
                 double.TryParse(amount.Replace('.', ','), out currency);
 
-                total = this.convert(currency, from, to);
-                Chart chart = this.collectChartData(currency, from, to, total.ToString());
+                total = this.Convert(currency, from, to);
+                Chart chart = this.CollectChartData(currency, from, to, total.ToString());
                 var serializer = new JavaScriptSerializer();
                 var serializedResult = serializer.Serialize(chart);
 
@@ -204,10 +197,10 @@ namespace WebApplication5.Controllers
             }
         }
 
-        public Chart collectChartData(double value, string from, string to, string retValue)
+        public Chart CollectChartData(double value, string from, string to, string retValue)
         {
-            string fromCurrency = this.getCurrencyCode(from);
-            string toCurrency = this.getCurrencyCode(to);
+            string fromCurrency = this.GetCurrencyCode(from);
+            string toCurrency = this.GetCurrencyCode(to);
             Chart chart = new Chart(retValue);
             double min = 0, max = 0;
 
@@ -217,7 +210,7 @@ namespace WebApplication5.Controllers
                 var currencies = item.Value;
                 var cfrom = currencies[fromCurrency];
                 var cto = currencies[toCurrency];
-                var total = this.convert(1,from,to,currencies);
+                var total = this.Convert(1, from, to, currencies);
 
                 min = total < min ? total : min == 0 ? total : min;
                 max = total > max ? total : max;
@@ -229,17 +222,17 @@ namespace WebApplication5.Controllers
             return chart;
         }
 
-        public double convert(double value, string from, string to, Dictionary<string, double> currencies = null)
+        public double Convert(double value, string from, string to, Dictionary<string, double> currencies = null)
         {
             try
             {
                 if (value == 0) return 0;
 
-                string fromCurrency = this.getCurrencyCode(from);
-                string toCurrency = this.getCurrencyCode(to);
-                double oneEURValue = currencies != null ? Convert.ToDouble(currencies[fromCurrency]) : Convert.ToDouble(this.Currencies[fromCurrency]);
+                string fromCurrency = this.GetCurrencyCode(from);
+                string toCurrency = this.GetCurrencyCode(to);
+                double oneEURValue = currencies != null ? System.Convert.ToDouble(currencies[fromCurrency]) : System.Convert.ToDouble(this.Currencies[fromCurrency]);
                 double fromValInEUR = value / oneEURValue;
-                double toCurrencyNum = currencies != null ? Convert.ToDouble(currencies[toCurrency]) : Convert.ToDouble(this.Currencies[toCurrency]);
+                double toCurrencyNum = currencies != null ? System.Convert.ToDouble(currencies[toCurrency]) : System.Convert.ToDouble(this.Currencies[toCurrency]);
                 double toValInEUR = 1 / toCurrencyNum;
                 return fromValInEUR / toValInEUR;
             }
