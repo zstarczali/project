@@ -47,7 +47,7 @@
     HttpMethod = "POST",
     OnSuccess = "onSuccess",
     OnFailure = "FailMessage",
-    UpdateTargetId = "Text2"
+    UpdateTargetId = "result"
 }, new { id = "MyNewNameId" })) // set new Id name for  Form
 {
 
@@ -65,8 +65,7 @@
                         <label class="control-label" for="form-group-select">Currency</label>
                         <select id="from" name="from" class="form-control">
                             @{
-                                var ccode = ((HomeController)this.ViewContext.Controller).GetCurrencyCodes();
-                                var currencies = ((HomeController)this.ViewContext.Controller).GetCurrencyNameFromCode(ccode);
+                                var currencies = ((HomeController)this.ViewContext.Controller).GetCurrencyNames();
                             }
                             @foreach (var item in currencies)
                             {

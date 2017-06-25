@@ -148,7 +148,7 @@
     <Compile Include="Helper\Helper.cs" />
     <Compile Include="Models\Chart.cs" />
     <Compile Include="Models\ChartItem.cs" />
-    <Compile Include="Models\CurrencyConverter.cs" />
+    <Compile Include="Controllers\CurrencyConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
