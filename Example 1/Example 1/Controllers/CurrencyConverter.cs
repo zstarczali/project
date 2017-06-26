@@ -13,7 +13,7 @@ using WebApplication5.Models;
 namespace WebApplication5.Controllers
 {
     using Helper;
-    public class CurrencyConverter : Controller
+    public sealed class CurrencyConverter : Controller
     {
 
         private Dictionary<string, string> CurrencyNamesAndCodes = new Dictionary<string, string>();
@@ -22,7 +22,14 @@ namespace WebApplication5.Controllers
         private Dictionary<string, double> Currencies = new Dictionary<string, double>();
         private List<ChartItem> chart = new List<ChartItem>();
 
-        public void LoadAndCollectData()
+        private void LoadXML(string url, XmlDocument xmlDoc, XmlNamespaceManager nsMgr)
+        {
+            xmlDoc.Load(url);
+            nsMgr.AddNamespace("x", "http://www.ecb.int/vocabulary/2002-08-01/eurofxref");
+            nsMgr.AddNamespace("gemses", "http://www.gesmes.org/xml/2002-08-01");
+        }
+
+        public async Task LoadAndCollectData()
         {
             try
             {
@@ -30,17 +37,10 @@ namespace WebApplication5.Controllers
                 XmlDocument doc1 = new XmlDocument();
                 XmlNamespaceManager nsMgr = new XmlNamespaceManager(doc1.NameTable);
 
-                Task t = new Task(() =>
+                await Task.Run(() =>
                 {
-                    doc1.Load(url);
-                    nsMgr.AddNamespace("x", "http://www.ecb.int/vocabulary/2002-08-01/eurofxref");
-                    nsMgr.AddNamespace("gemses", "http://www.gesmes.org/xml/2002-08-01");
+                    LoadXML(url, doc1, nsMgr);
                 });
-
-
-                t.Start();
-                t.Wait();
-
 
                 XmlElement root = doc1.DocumentElement;
                 XmlNodeList nodes = root.SelectNodes("x:Cube/x:Cube", nsMgr);

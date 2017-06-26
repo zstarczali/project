@@ -6,19 +6,20 @@ using System.Web.Mvc;
 
 namespace WebApplication5.Controllers
 {
-    using Helper;
+    using System.Threading.Tasks;
+
     public class HomeController : Controller
     {
         public CurrencyConverter converter = new CurrencyConverter();
 
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             ViewBag.Message = "";
 
             try
             {
-                converter.LoadAndCollectData();
+                await converter.LoadAndCollectData();
                 SaveState();
             }
             catch (Exception ex)
@@ -29,12 +30,12 @@ namespace WebApplication5.Controllers
             return View();
         }
 
-        public void SaveState()
+        private void SaveState()
         {
             HttpContext.Session.Add("CurrencyConverter", this.converter);
         }
 
-        public void LoadState()
+        private void LoadState()
         {
             this.converter = HttpContext.Session["CurrencyConverter"] as CurrencyConverter;
         }
